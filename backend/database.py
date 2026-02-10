@@ -5,10 +5,26 @@ import json
 
 class WMTBDatabase:
     def __init__(self):
-        # You'll need to get these from supabase.com
+    # Get from environment or use defaults for testing
+    self.url = os.environ.get("SUPABASE_URL", "")
+    self.key = os.environ.get("SUPABASE_KEY", "")
+    
+    # If no environment vars, try to load from .env file
+    if not self.url or not self.key:
+        from dotenv import load_dotenv
+        load_dotenv()
         self.url = os.environ.get("SUPABASE_URL", "")
         self.key = os.environ.get("SUPABASE_KEY", "")
-        self.supabase: Client = create_client(self.url, self.key)
+    
+    # Still no credentials? Use a dummy client that prints errors
+    if not self.url or not self.key:
+        print("⚠️ WARNING: No Supabase credentials found.")
+        print("⚠️ Running in local mode (data won't be saved).")
+        self.supabase = None
+        return
+    
+    print(f"✅ Connecting to Supabase at: {self.url[:30]}...")
+    self.supabase: Client = create_client(self.url, self.key)
     
     def create_tables(self):
         # SQL to run in Supabase SQL editor
@@ -57,7 +73,9 @@ class WMTBDatabase:
         return sql
     
     def add_transaction(self, user_id, amount, description, category, trans_type, raw_text=""):
-        data = {
+    if self.supabase is None:
+        print(f"LOCAL MODE: Would add transaction: {description} - {amount}")
+        return {"id": "local", "amount": amount, "description": description} = {
             "user_id": user_id,
             "amount": float(amount),
             "description": description,
