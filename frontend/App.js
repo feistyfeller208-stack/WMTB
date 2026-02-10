@@ -11,11 +11,11 @@ import RulesTab from './components/RulesTab';
 const Tab = createBottomTabNavigator();
 
 // Backend URL - CHANGE THIS TO YOUR BACKEND URL
-const BACKEND_URL = 'http://localhost:5000'; // Change when deployed
+const BACKEND_URL = 'https://wmtb.onrender.com'; // Your Render URL
 
 export default function App() {
   // For demo - in real app, use proper auth
-  const [userId] = useState('demo-user-123');
+  const [userId] = useState('11111111-1111-1111-1111-111111111111');
   const [balance, setBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
 
