@@ -1,0 +1,11 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "pip install -r backend/requirements.txt"
+  },
+  "deploy": {
+    "startCommand": "cd backend && python app.py",
+    "healthcheckPath": "/api/health",
+    "healthcheckTimeout": 300
+  }
+}
