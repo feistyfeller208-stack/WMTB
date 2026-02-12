@@ -6,25 +6,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-apk:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Get your repo
       - uses: actions/checkout@v4
 
+      # 2️⃣ Setup Node
       - uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # 3️⃣ Install EAS CLI
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Install dependencies
+      # 4️⃣ Install dependencies
+      - name: Install frontend dependencies
         run: |
           cd frontend
           npm install
 
-      - name: Build APK
+      # 5️⃣ Run EAS build (cloud)
+      - name: Build APK via EAS
         run: |
           cd frontend
           eas build -p android --profile preview --non-interactive
