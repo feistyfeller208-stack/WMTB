@@ -27,7 +27,8 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend
-          npm ci  # Clean install, no yarn
+          rm -rf node_modules package-lock.json yarn.lock
+          npm install --force
 
       - name: Build APK
         run: |
