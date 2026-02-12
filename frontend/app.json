@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "WMTB",
+    "slug": "wmtb",
+    "owner": "fei208",
+    "version": "1.0.0",
+    "android": {
+      "package": "com.fei208.wmtb"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7b76e4e8-5fc6-4142-97b6-a73ef0bc4cc9"
+      }
+    }
+  }
+}
