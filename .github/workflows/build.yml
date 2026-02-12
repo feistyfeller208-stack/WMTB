@@ -17,9 +17,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
 
-      - name: Setup Expo & EAS
+      - name: Setup Expo and EAS
         uses: expo/expo-github-action@v8
         with:
           expo-version: latest
@@ -29,9 +28,9 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend
-          npm ci
+          npm install
 
-      - name: Build Android APK (Cloud)
+      - name: Build APK with EAS
         run: |
           cd frontend
           eas build -p android --profile preview --non-interactive
